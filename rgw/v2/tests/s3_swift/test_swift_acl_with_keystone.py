@@ -110,7 +110,7 @@ def put_keystone_conf(rgw_service_name, user, passw, project, tenant="true"):
     log.info("Restart RGW for options to take effect")
     utils.exec_shell_cmd(f"ceph orch restart {rgw_service_name}")
 
-    time.sleep(10)
+    time.sleep(20)
 
 
 def cleanup_keystone(user="admin"):
