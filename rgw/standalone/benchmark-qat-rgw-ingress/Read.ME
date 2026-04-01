@@ -1,0 +1,25 @@
+Author Name : Sohan Singh
+Benchmark-Scripts for RGW-Ingress-QAT
+======================================
+1. update access key secret key in run-all.sh
+2. export as the output comes
+3. use benchmark-script : DEBUG  Mode- the faileed services will stay in cluster to debug
+4. use benchmark-scripts : CLEAN Mode - It will cleanup the failed services as well.
+5. Each run will be creating results in /root/bechmark/results/{TIMESTAMP RESULT}
+6. The unsupported Scenarios clean up will not be covered - since abrupt failure 
+#   ./run-all.sh                  # Run all scenarios
+#   ./run-all.sh --supported      # Run only supported scenarios (skip 6, 8, 12, 14)
+#   ./run-all.sh --scenario 5     # Run a single scenario
+#   ./run-all.sh --range 5 10     #
+
+List of all free IPs:
+
+for ip in 9.11.120.{200..254} 9.11.121.{1..100}; do
+  arping -c 1 -W 1 -I ens3 $ip &>/dev/null || echo "FREE: $ip"
+done
+``
+
+
+GET FIRST FREE IP :
+VIP=$(for i in {200..254}; do arping -c1 -W1 -I ens3 9.11.120.$i &>/dev/null || { echo 9.11.120.$i; break; }; done)
+echo $VIP
